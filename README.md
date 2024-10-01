@@ -41,36 +41,46 @@ my-go-project/
 
 ### Explanation of Each Directory and File:
 
-1. api/
+1. `api/`
    This directory contains all the code related to HTTP endpoints:
 
-handler.go: Contains the logic for handling HTTP requests (like controllers in MVC).
-middleware.go: Middleware functions such as authentication, logging, etc. 2. cmd/
-This is the entry point for your applications. For example, if your project has multiple binaries, you can put them under separate directories in cmd/. Each directory under cmd/ contains its own main.go file.
+- `handler.go`: Contains the logic for handling HTTP requests (like controllers in MVC).
+- `middleware.go`: Middleware functions such as authentication, logging, etc.
 
-cmd/my-go-project/main.go: The main Go file for the my-go-project app. 3. config/
-This folder stores configurations (loading config from environment variables, files, or flags). You can also create config structs here.
+2. `cmd/`
+   This is the entry point for your applications. For example, if your project has multiple binaries, you can put them under separate directories in cmd/. Each directory under cmd/ contains its own main.go file.
 
-config.go: Loads configurations like API keys, database connections, etc. 4. internal/
-This is for the core logic of the application and is inaccessible to external projects (because of the Go convention). It's used for your service layer, models, and repositories:
+- cmd/my-go-project/main.go: The main Go file for the my-go-project app.
 
-service/: Contains the business logic (application logic).
-models/: Contains your data models (for example, structs representing database entities).
-user.go: Could define the User struct.
-repository/: Data access layer, which communicates with the database (commonly called DAOs in other languages). 5. pkg/
-This folder is for packages that you might want to make available for external use. These packages are meant to be imported by other projects.
+3. `config/`
+   This folder stores configurations (loading config from environment variables, files, or flags). You can also create config structs here.
 
-utils/: Utility or helper functions that can be reused across different packages.
-string_utils.go: Utility functions for working with strings (e.g., converting to camelCase, snake_case). 6. vendor/
-This is optional. If you run go mod vendor, this directory will hold all your external dependencies locally. Useful for ensuring reproducibility in builds, especially in CI/CD pipelines or air-gapped environments.
+- `config.go`: Loads configurations like API keys, database connections, etc.
 
-7. go.mod and go.sum
-   go.mod: The module definition file where Go modules and dependencies are defined.
-   go.sum: Auto-generated file containing checksums of the module dependencies.
-8. Makefile
-   A Makefile is used for automating commands (e.g., make build, make run, make test). It helps you define shortcuts for compiling, running tests, or other repeated tasks.
+4. `internal/`
+   This is for the core logic of the application and is inaccessible to external projects (because of the Go convention). It's used for your service layer, models, and repositories:
 
-9. README.md
+- `models/`: Contains your data models (for example, structs representing database entities).
+  - `user.go`: Could define the User struct.
+- `repository/`: Data access layer, which communicates with the database (commonly called DAOs in other languages).
+- `service/`: Contains the business logic (application logic).
+
+5. `pkg/`
+
+- `utils/`: Utility or helper functions that can be reused across different packages.
+- `string_utils.go`: Utility functions for working with strings (e.g., converting to camelCase, snake_case).
+
+6. `vendor/`
+   This is optional. If you run go mod vendor, this directory will hold all your external dependencies locally. Useful for ensuring reproducibility in builds, especially in CI/CD pipelines or air-gapped environments.
+
+7. `go.mod` and `go.sum`
+   `go.mod`: The module definition file where Go modules and dependencies are defined.
+   `go.sum`: Auto-generated file containing checksums of the module dependencies.
+
+8. `Makefile`
+   A Makefile is used for automating commands (e.g., `make build`, `make run`, `make test`). It helps you define shortcuts for compiling, running tests, or other repeated tasks.
+
+9. `README.md`
    Provides a summary of the project, how to set it up, and how to use it.
 
 ### Example Breakdown of main.go in cmd/my-go-project/:
@@ -102,8 +112,8 @@ func main() {
 ```
 
 How to Scale the Project
-As the project grows, you can add more packages in the internal/ or pkg/ directories for additional functionality (like new services, models, or repositories).
-You can create sub-packages (e.g., internal/service/user or pkg/auth) to better separate logic and keep files manageable.
+As the project grows, you can add more packages in the `internal/` or `pkg/` directories for additional functionality (like new services, models, or repositories).
+You can create sub-packages (e.g., `internal/service/user` or `pkg/auth`) to better separate logic and keep files manageable.
 The folder structure ensures that the project is modular, which is crucial for testability and maintainability.
 Let me know if you'd like help setting up any specific part of this structure!
 
@@ -152,7 +162,7 @@ The Go `vendor` directory is a special folder used for dependency management. Wh
 4. **Structure of the `vendor/` Directory**:
    Once the `vendor` command is run, the structure looks like this:
 
-   ```
+   ```zsh
    my-go-project/
    ├── vendor/                  # Contains all dependencies
    │   └── github.com/
@@ -210,7 +220,7 @@ touch cmd/gox/main.go config/config.go internal/service/service.go internal/mode
 
 This will create the following structure:
 
-```
+```zsh
 gox/
 ├── api/                   # API-related logic
 ├── cmd/
@@ -313,5 +323,3 @@ Visit `http://localhost:8080/` in your browser, and you should see `Welcome to g
 2. **Models (`models`)**: Define your data models inside `internal/models/user.go`.
 3. **Repository (`repository`)**: Add database interactions inside `internal/repository/user_repo.go`.
 4. **Utils (`pkg/utils`)**: Add reusable utility functions inside `pkg/utils`.
-
-Let me know if you need help adding specific functionality or organizing anything!
