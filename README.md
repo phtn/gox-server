@@ -1,6 +1,8 @@
-Scalable Go Project Folder Structure
+## Scalable Go Project Folder Structure
 
-In Go, a scalable and well-structured folder setup is essential for managing larger projects. As the project grows, you may want to split logic into different files and packages. Here's a commonly used folder structure that is modular and follows Go best practices, designed to handle future scalability:
+> In Go, a scalable and well-structured folder setup is essential for managing larger projects. As the project grows, you may want to split logic into different files and packages. Here's a commonly used folder structure that is modular and follows Go best practices, designed to handle future scalability.
+
+```zsh
 
 my-go-project/
 ├── api/ # API-related logic
@@ -35,8 +37,9 @@ my-go-project/
 ├── go.sum # Dependency versions checksum file
 ├── Makefile # Commands to automate tasks (e.g., build, run, test)
 └── README.md # Documentation for the project
+```
 
-Explanation of Each Directory and File:
+### Explanation of Each Directory and File:
 
 1. api/
    This directory contains all the code related to HTTP endpoints:
