@@ -10,31 +10,27 @@ import (
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Welcome to gox.")
+	utils.Indent(w, "Welcome to gox.")
 }
 
 func GetAllUsersHandler(w http.ResponseWriter, r *http.Request) {
 	users := repository.GetAllUsers()
-	w.Header().Set("Content-Type", "application/json")
-	utils.WriteJSON(w, users)
-	fmt.Fprint(w, "\n\n api: GetAllUsers \n")
+
+	utils.Indent(w, users)
+	fmt.Fprint(w, "\n\n api: GetAllUsers \n\n")
 }
 
 func GetUserByIdHandler(w http.ResponseWriter, r *http.Request) {
 	idStr := r.URL.Query().Get("id")
+
 	id, err := uuid.Parse(idStr)
-	if err != nil {
-		utils.WriteJSON(w, "id not found")
-		return
-	}
+	utils.ErrHandler(w, err)
+
 	user, err := repository.GetUserById(id)
-	if err != nil {
-		utils.WriteJSON(w, "user not found")
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	utils.WriteJSON(w, user)
-	fmt.Fprint(w, "\n\n api: GetUserById \n")
+	utils.ErrHandler(w, err)
+
+	utils.Indent(w, user)
+	fmt.Fprint(w, "\n\n GetUserById \n\n")
 }
 
 // func PostUserHandler(w http.ResponseWriter, r *http.Request) {
